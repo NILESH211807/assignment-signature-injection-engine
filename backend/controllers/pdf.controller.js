@@ -1,7 +1,7 @@
 const generateHash = require("../utils/hash");
 const { modifyPdf } = require("../utils/modifyPdf");
 const pdfModel = require("../models/pdf.model");
-const { uploadToImageKit } = require("../utils/ImageKit");
+const { uploadToImageKit } = require("../utils/ImageKitUploader");
 
 
 module.exports.signPdf = async (req, res) => {

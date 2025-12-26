@@ -1,7 +1,7 @@
-const imagekitConfig = require("../config/imageKitConfig");
+const ImagekitConfig = require("../config/imageKitConfig");
 
 const uploadToImageKit = async (pdfBytes) => {
-    const result = await imagekitConfig.upload({
+    const result = await ImagekitConfig.upload({
         file: Buffer.from(pdfBytes),
         fileName: `signed_${Date.now()}.pdf`,
         folder: "/signed_pdfs",
