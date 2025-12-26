@@ -1,4 +1,4 @@
-const imagekitConfig = require("../config/imageKit");
+const imagekitConfig = require("../config/imageKitConfig");
 
 const uploadToImageKit = async (pdfBytes) => {
     const result = await imagekitConfig.upload({
