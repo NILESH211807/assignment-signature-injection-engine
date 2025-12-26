@@ -3,12 +3,12 @@ const { modifyPdf } = require("../utils/modifyPdf");
 const pdfModel = require("../models/pdf.model");
 const { uploadToImageKit } = require("../utils/ImageKit");
 
-// 
+
 module.exports.signPdf = async (req, res) => {
     try {
 
         const pdfBuffer = req.file.buffer; // PDF FILE
-        const images = req.body.fields;
+        const fields = req.body.fields;
 
         if (!req.file) {
             return res.status(400).json({
@@ -18,7 +18,7 @@ module.exports.signPdf = async (req, res) => {
 
         // before hash
         const beforeHash = generateHash(pdfBuffer);
-        const signedPdf = await modifyPdf(pdfBuffer, images);
+        const signedPdf = await modifyPdf(pdfBuffer, fields);
 
         // after hash
         const afterHash = generateHash(signedPdf);
@@ -36,7 +36,6 @@ module.exports.signPdf = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
         res.status(500).json({
             message: err.message || "Internal server error"
         });

@@ -9,6 +9,7 @@ import DrawSignature from '../components/DrawSignature';
 import { useNavigate } from 'react-router-dom';
 import { getRelativeCoords, getWidthPercent } from '../utils/coordinate';
 import debounce from '../utils/dbounce';
+import DraggableTextBox from '../components/DraggableTextBox';
 
 const PdfViewer = () => {
 
@@ -79,7 +80,7 @@ const PdfViewer = () => {
 
     return (
         <div className='w-full min-h-screen p-10 max-sm:px-4'>
-            <ToolBar />
+            <ToolBar handleUpdateFields={handleUpdateFields} />
             <div className='min-h-screen relative mx-auto w-full mt-6 min-[1100px]:pl-40'
                 style={{ width: '100%', maxWidth: '900px', margin: '0 auto' }}>
                 <div className='w-full flex items-center justify-center gap-5 max-sm:flex-wrap max-sm:gap-2'>
@@ -98,24 +99,27 @@ const PdfViewer = () => {
                     onLoadSuccess={onDocumentLoadSuccess}
                     className="flex flex-col items-center gap-4 min-h-screen">
                     <div>
-                        <div className="border border-(--border) relative">
+                        <div ref={pageRef} className='border border-(--border) relative'>
                             {
                                 fields?.map((field, index) => {
-                                    if (field.pageNumber === pageNumber) {
+                                    if (field.pageNumber === pageNumber && field.type === 'signature') {
                                         return <DragAndResize
                                             key={index} field={field}
                                             handleUpdateFields={handleUpdateFields} />
+                                    } else if (field.pageNumber === pageNumber && field.type === 'textbox') {
+                                        return <DraggableTextBox
+                                            key={index} field={field}
+                                            handleUpdateFields={handleUpdateFields}
+                                            pageRef={pageRef} />
                                     }
                                 })
                             }
-                            <div ref={pageRef}>
-                                <Page
-                                    pageNumber={pageNumber}
-                                    width={screenWidth > 768 ? 650 : screenWidth - 50}
-                                    renderTextLayer={false}
-                                    renderAnnotationLayer={true}
-                                />
-                            </div>
+                            <Page
+                                pageNumber={pageNumber}
+                                width={screenWidth > 768 ? 650 : screenWidth - 50}
+                                renderTextLayer={false}
+                                renderAnnotationLayer={true}
+                            />
                         </div>
                     </div>
                 </Document>

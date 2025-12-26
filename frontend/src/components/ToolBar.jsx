@@ -2,10 +2,30 @@ import { FaRegImage, FaSignature } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { BsInputCursor } from "react-icons/bs";
 import { usePdf } from '../hooks/usePdf';
+import { v4 as uuidv4 } from 'uuid';
 
-const ToolBar = () => {
+const ToolBar = ({ handleUpdateFields }) => {
 
-    const { setIsOpenSignModel, isMenuOpen, setIsMenuOpen } = usePdf();
+    const { setIsOpenSignModel, isMenuOpen, setIsMenuOpen, setFields } = usePdf();
+
+    const addTextBox = () => {
+
+        const data = {
+            id: uuidv4(),
+            type: "textbox",
+            value: '',
+            x: Math.random() * 200 + 50,
+            y: Math.random() * 200 + 50,
+            w: 200,
+            h: 40,
+        }
+
+        setFields((prevFields) => [...prevFields, data]);
+        setIsMenuOpen(false);
+
+
+        handleUpdateFields(data);
+    }
 
     return (
         <>
@@ -22,7 +42,7 @@ const ToolBar = () => {
                         <span>Signature</span>
                     </Link>
 
-                    <Link to="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-xl transition-colors text-sm group font-semibold">
+                    <Link onClick={addTextBox} to="#" className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-indigo-600 rounded-xl transition-colors text-sm group font-semibold">
                         <BsInputCursor size={20} />
                         <span>Text Box</span>
                     </Link>

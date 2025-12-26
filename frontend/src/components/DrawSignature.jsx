@@ -12,6 +12,10 @@ const DrawSignature = ({ handleUpdateFields }) => {
     const [isDrawSign, setIsDrawSign] = useState(true);
     const [isDragOver, setIsDragOver] = useState(false);
     const [signedImageBase64, setSignedImageBase64] = useState(null);
+    const [imgDimensions, setImgDimensions] = useState({
+        imgWidth: 0,
+        imgHeight: 0,
+    })
 
     const clear = () => sigCanvas.current.clear();
 
@@ -52,8 +56,8 @@ const DrawSignature = ({ handleUpdateFields }) => {
             type: "signature",
             x: Math.random() * 200 + 50,
             y: Math.random() * 200 + 50,
-            w: 200,
-            h: 80,
+            w: imgDimensions.imgWidth || 150,
+            h: imgDimensions.imgHeight || 70,
             imageBase64: image,
         }
 
@@ -71,10 +75,31 @@ const DrawSignature = ({ handleUpdateFields }) => {
             } else if (file && file.size > 1024 * 1024 * 5) {
                 throw new Error("File size should be less than 5MB");
             }
+
+            const img = new Image();
+            const objectUrl = URL.createObjectURL(file);
+            img.src = objectUrl;
+
+            img.onload = () => {
+                const width = img.naturalWidth;
+                const height = img.naturalHeight;
+
+                if (width > 300) {
+                    const ratio = width / 300;
+                    setImgDimensions({
+                        imgWidth: 300,
+                        imgHeight: height / ratio,
+                    });
+                }
+
+                URL.revokeObjectURL(objectUrl);
+            }
+
             // base 64 image 
             const reader = new FileReader();
             reader.onload = () => {
                 setSignedImageBase64(reader.result);
+
             };
             reader.readAsDataURL(file);
 
