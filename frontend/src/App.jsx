@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router-dom'
 import MainLayout from './layout/MainLayout'
 import { Toaster } from 'react-hot-toast';
 import Loading from './components/Loading';
-const UploadPDF = React.lazy(() => import('./pages/UploadPDF'));
-const PdfViewer = React.lazy(() => import('./pages/PdfViewer'));
+// const UploadPDF = React.lazy(() => import('./pages/UploadPDF'));
+// const PdfViewer = React.lazy(() => import('./pages/PdfViewer'));
+import UploadPDF from './pages/UploadPDF';
+import PdfViewer from './pages/PdfViewer'
 
 const App = () => {
     return (
@@ -12,18 +14,18 @@ const App = () => {
 
             <Routes>
                 <Route path='/' element={
-                    <Suspense fallback={<Loading />}>
-                        <MainLayout>
-                            <UploadPDF />
-                        </MainLayout>
-                    </Suspense>
+                    // <Suspense fallback={<Loading />}>
+                    <MainLayout>
+                        <UploadPDF />
+                    </MainLayout>
+                    // </Suspense>
                 } />
                 <Route path='/sign-pdf' element={
-                    <Suspense fallback={<Loading />}>
-                        <MainLayout>
-                            <PdfViewer />
-                        </MainLayout>
-                    </Suspense>
+                    // <Suspense fallback={<Loading />}>
+                    <MainLayout>
+                        <PdfViewer />
+                    </MainLayout>
+                    // </Suspense>
                 } />
             </Routes>
             <Toaster />
