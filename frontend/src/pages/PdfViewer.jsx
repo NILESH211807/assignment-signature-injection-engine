@@ -83,12 +83,12 @@ const PdfViewer = () => {
             <ToolBar handleUpdateFields={handleUpdateFields} />
             <div className='min-h-screen relative mx-auto w-full mt-6 min-[1100px]:pl-40'
                 style={{ width: '100%', maxWidth: '900px', margin: '0 auto' }}>
-                <div className='w-full flex items-center justify-center gap-5 max-sm:flex-wrap max-sm:gap-2'>
+                <div className='w-full flex items-center justify-center gap-5 max-sm:flex-wrap max-sm:gap-2  max-sm:mb-10 mb-5'>
                     {
                         pages.map((el, index) => (
                             <button key={index}
                                 onClick={() => setPageNumber(index + 1)}
-                                className={`text-sm font-semibold max-sm:px-5 max-sm:mb-10 rounded-md mb-5 cursor-pointer border border-(--border) px-8 py-2 ${pageNumber === index + 1 ? 'bg-gray-600 text-gray-200 ' : 'bg-gray-100 text-gray-800 '}`}>
+                                className={`text-sm font-semibold max-sm:px-5 rounded-md cursor-pointer border border-(--border) px-8 py-2 ${pageNumber === index + 1 ? 'bg-gray-600 text-gray-200 ' : 'bg-gray-100 text-gray-800 '}`}>
                                 Page {index + 1}
                             </button>
                         ))

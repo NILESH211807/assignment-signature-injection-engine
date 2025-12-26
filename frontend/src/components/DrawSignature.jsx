@@ -133,7 +133,7 @@ const DrawSignature = ({ handleUpdateFields }) => {
         <>
             <div className='w-full h-full fixed top-0 left-0 bg-gray-950/50 z-1000'>
             </div>
-            <div className='w-xl max-w-[90%] rounded-md bg-white fixed z-1001 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5'>
+            <div className='w-xl max-w-[95%] rounded-md bg-white fixed z-1001 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 max-sm:p-3'>
                 <h1 className='text-left text-sm font-semibold w-full'>Draw Or Upload Your Signature</h1>
                 <div className='w-full flex items-center justify-start gap-5 my-3'>
                     <button onClick={() => setIsDrawSign(true)} className={`${isDrawSign ? 'bg-(--accent) text-white' : 'bg-gray-200 hover:bg-gray-300'} transition-all duration-300 ease-in text-sm font-semibold rounded-md px-4 py-1.25 cursor-pointer`}>Draw Sign</button>
@@ -181,18 +181,18 @@ const DrawSignature = ({ handleUpdateFields }) => {
                 <div className='w-full flex items-center'>
                     {
                         isDrawSign && (
-                            <button onClick={clear} className='bg-gray-200 hover:bg-gray-300 transition-all duration-300 ease-in text-sm font-semibold rounded-md px-4 py-1.25 cursor-pointer'>Clear</button>
+                            <button onClick={clear} className='bg-gray-200 hover:bg-gray-300 transition-all duration-300 ease-in text-sm font-semibold rounded-md px-4 py-1.25 cursor-pointer  max-sm:text-[12px]'>Clear</button>
                         )
                     }
 
                     {
                         signedImageBase64 && (
-                            <button onClick={() => setSignedImageBase64(null)} className='bg-gray-200 hover:bg-gray-300 transition-all duration-300 ease-in text-sm font-semibold rounded-md px-4 py-1.25 cursor-pointer'>Remove</button>
+                            <button onClick={() => setSignedImageBase64(null)} className='bg-gray-200 hover:bg-gray-300 transition-all duration-300 ease-in text-sm font-semibold rounded-md px-4 py-1.25 cursor-pointer  max-sm:text-[12px]'>Remove</button>
                         )
                     }
                     <div className='w-full flex justify-end gap-5 mt-5'>
-                        <button onClick={clearAll} className='bg-red-600 hover:bg-red-700 transition-all duration-300 ease-in text-white text-sm font-semibold rounded-md px-4 py-2 cursor-pointer'>Close</button>
-                        <button onClick={saveCanvasSignature} className='bg-(--accent) text-white text-sm font-semibold rounded-md px-4 py-2 cursor-pointer'>Save Signature</button>
+                        <button onClick={clearAll} className='bg-red-600 hover:bg-red-700 transition-all duration-300 ease-in text-white text-sm font-semibold rounded-md px-4 py-2 cursor-pointer  max-sm:text-[12px]'>Close</button>
+                        <button onClick={saveCanvasSignature} className='bg-(--accent) text-white text-sm font-semibold rounded-md px-4 py-2 cursor-pointer max-sm:text-[12px]'>Save Signature</button>
                     </div>
                 </div>
             </div>
