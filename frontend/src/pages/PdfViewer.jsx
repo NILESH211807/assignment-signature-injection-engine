@@ -1,9 +1,9 @@
 import { Activity, useEffect, useRef, useState } from 'react'
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
 import ToolBar from '../components/ToolBar';
 import { Document, Page } from 'react-pdf';
 import { usePdf } from '../hooks/usePdf';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
 import DragAndResize from '../components/DragAndResize';
 import DrawSignature from '../components/DrawSignature';
 import { useNavigate } from 'react-router-dom';
