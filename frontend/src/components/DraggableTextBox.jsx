@@ -12,30 +12,39 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
     const containerRef = useRef(null);
     const { setFields } = usePdf();
 
-    // handleMouseDown
-    const handleMouseDown = (e, id, action) => {
+    // handlePointerDown 
+    const handlePointerDown = (e, id, action) => {
         e.preventDefault();
-        if (action === 'drag') {
+        e.stopPropagation();
+
+        e.currentTarget.setPointerCapture(e.pointerId);
+
+        // drag 
+        if (action === "drag") {
             setDraggedField(id);
             setDragOffset({
                 x: e.clientX - field.x,
                 y: e.clientY - field.y
-            });
-        } else if (action === 'resize') {
+            })
+        }
+
+        // resize
+        if (action === "resize") {
             setResizingField({
-                id: id,
+                id,
                 startX: e.clientX,
                 startY: e.clientY,
                 startWidth: field.w,
                 startHeight: field.h
-            });
+            })
         }
-    };
+    }
 
-    // handleMouseMove
-    const handleMouseMove = (e) => {
+    // handlePointerMove
+    const handlePointerMove = (e) => {
+        e.preventDefault();
+
         if (draggedField !== null) {
-
             const data = {
                 id: draggedField,
                 x: e.clientX - dragOffset.x,
@@ -44,11 +53,13 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
                 h: field.h
             }
 
-            setFields(prev => prev.map(item =>
-                item.id === draggedField
-                    ? { ...item, ...data }
-                    : item
-            ));
+            setFields((prev) =>
+                prev.map((item) =>
+                    item.id === draggedField ?
+                        { ...item, ...data }
+                        : item
+                )
+            )
             handleUpdateFields(data);
         }
 
@@ -64,28 +75,31 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
                 y: field.y
             }
 
-            setFields(prev => prev.map(item =>
-                item.id === resizingField.id
-                    ? {
-                        ...item, ...data
-                    }
-                    : item
-            ));
+            setFields((prev) =>
+                prev.map((item) =>
+                    item.id === resizingField.id ?
+                        { ...item, ...data }
+                        : item
+                )
+            )
+
             handleUpdateFields(data);
         }
-    };
+    }
 
-    // handleMouseUp
-    const handleMouseUp = () => {
+
+    // handlePointerUp
+    const handlePointerUp = () => {
         setDraggedField(null);
         setResizingField(null);
     };
 
-    // handleMouseLeave
-    const handleMouseLeave = () => {
+    // handlePointerLeave
+    const handlePointerLeave = () => {
         setResizingField(null);
         setDraggedField(null);
     };
+
 
     // remove
     const remove = (field) => {
@@ -102,8 +116,8 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
 
     return (
         <div className=""
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
             ref={containerRef}>
             <div key={field.id}
                 className="absolute rounded-md bg-(--accent)/10 border border-dotted border-(--accent) cursor-move"
@@ -114,8 +128,8 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
                     height: `${field.h}px`,
                     zIndex: '49',
                 }}
-                onMouseDown={(e) => handleMouseDown(e, field.id, 'drag')}
-                onMouseLeave={handleMouseLeave}>
+                onPointerDown={(e) => handlePointerDown(e, field.id, 'drag')}
+                onPointerLeave={handlePointerLeave}>
                 <div className="absolute w-full -top-6.25 rounded-2xl flex justify-center left-0 text-xl bg-gray-100">
                     <RxBorderDotted />
                 </div>
@@ -127,7 +141,7 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
                     placeholder='Enter Text'
                     value={field.value}
                     onChange={handleInputChange}
-                    onMouseDown={(e) => e.stopPropagation()}
+                    onPointerDown={(e) => e.stopPropagation()}
                     style={{
                         width: "100%",
                         height: "100%",
@@ -141,9 +155,9 @@ const DraggableTextBox = ({ field, handleUpdateFields }) => {
 
                 <div
                     className="absolute -bottom-1 -right-1 w-2 h-2 bg-(--accent) rounded-full cursor-se-resize"
-                    onMouseDown={(e) => {
+                    onPointerDown={(e) => {
                         e.stopPropagation();
-                        handleMouseDown(e, field.id, 'resize');
+                        handlePointerDown(e, field.id, 'resize');
                     }}
                 />
             </div>
