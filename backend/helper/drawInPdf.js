@@ -29,11 +29,11 @@ module.exports.embedImage = async function (assets) {
 
 
     // percentage to pixel
-    const width = widthPercent * pageWidth;
-    const height = heightPercent * pageHeight;
-    const x = xPercent * pageWidth;
+    const width = (widthPercent / 100) * pageWidth;
+    const height = (heightPercent / 100) * pageHeight;
+    const x = (xPercent / 100) * pageWidth;
 
-    const y = pageHeight - (yPercent * pageHeight) - height;
+    const y = pageHeight - (yPercent / 100) * pageHeight - height;
 
     // draw image
     page.drawImage(embeddedImage, {
@@ -60,11 +60,11 @@ module.exports.embedText = async function (assets) {
         heightPercent,
     } = assets;
 
-    const width = widthPercent * pageWidth;
-    const height = heightPercent * pageHeight;
+    const width = (widthPercent / 100) * pageWidth;
+    const height = (heightPercent / 100) * pageHeight;
 
-    const x = xPercent * pageWidth;
-    const y = pageHeight - (yPercent * pageHeight) - height;
+    const x = (xPercent / 100) * pageWidth;
+    const y = pageHeight - (yPercent / 100) * pageHeight - height;
 
     page.drawText(value, {
         x,

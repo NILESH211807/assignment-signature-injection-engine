@@ -1,12 +1,12 @@
 
 import React, { useCallback, useState } from 'react'
-import { ArrowUpFromLine, Trash2, Upload } from 'lucide-react';
 import { usePdf } from '../hooks/usePdf';
 import toast from 'react-hot-toast';
 import { FaFilePdf } from "react-icons/fa6";
 import { GrFormNext } from "react-icons/gr";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
+import { LuUpload } from "react-icons/lu";
 
 
 function formatFileSize(size) {
@@ -89,7 +89,7 @@ const UploadPDF = () => {
                             ) : (
                                 <>
                                     <div className="bg-gray-200 p-5 border-2 border-gray-300 rounded-full mb-4">
-                                        <Upload size={30} />
+                                        <LuUpload size={30} />
                                     </div>
                                     <p className="text-[16px] text-gray-800 font-medium">Browse or drag a file here</p>
                                     <p className="text-sm font-medium text-gray-800">Supported Files : PDF Only</p>

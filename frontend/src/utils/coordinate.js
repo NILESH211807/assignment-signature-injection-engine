@@ -1,9 +1,9 @@
-export const getRelativeCoords = (x, y, pdfWidth, pdfHeight) => ({
-    xPercent: x / pdfWidth,
-    yPercent: y / pdfHeight,
+export const getRelPosition = (x, y, pdfWidth, pdfHeight) => ({
+    xPercent: (x / pdfWidth) * 100,
+    yPercent: (y / pdfHeight) * 100,
 });
 
-export const getWidthPercent = (w, h, pdfWidth, pdfHeight) => ({
-    widthPercent: w / pdfWidth,
-    heightPercent: h / pdfHeight,
+export const getRelSize = (w, h, pdfWidth, pdfHeight) => ({
+    widthPercent: (w / pdfWidth) * 100,
+    heightPercent: (h / pdfHeight) * 100,
 });

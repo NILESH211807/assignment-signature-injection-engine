@@ -7,7 +7,7 @@ import 'react-pdf/dist/Page/TextLayer.css';
 import DragAndResize from '../components/DragAndResize';
 import DrawSignature from '../components/DrawSignature';
 import { useNavigate } from 'react-router-dom';
-import { getRelativeCoords, getWidthPercent } from '../utils/coordinate';
+import { getRelPosition, getRelSize } from '../utils/coordinate';
 import debounce from '../utils/dbounce';
 import DraggableTextBox from '../components/DraggableTextBox';
 
@@ -45,8 +45,8 @@ const PdfViewer = () => {
 
         const rect = pageRef.current.getBoundingClientRect();
 
-        const relative = getRelativeCoords(field.x, field.y, rect.width, rect.height);
-        const per = getWidthPercent(field.w, field.h, rect.width, rect.height);
+        const pos = getRelPosition(field.x, field.y, rect.width, rect.height);
+        const size = getRelSize(field.w, field.h, rect.width, rect.height);
 
         setFields(prev =>
             prev.some(f => f.id === field.id)
@@ -55,10 +55,10 @@ const PdfViewer = () => {
                         ? {
                             ...f,
                             pageNumber,
-                            xPercent: relative.xPercent,
-                            yPercent: relative.yPercent,
-                            widthPercent: per.widthPercent,
-                            heightPercent: per.heightPercent,
+                            xPercent: pos.xPercent,
+                            yPercent: pos.yPercent,
+                            widthPercent: size.widthPercent,
+                            heightPercent: size.heightPercent,
                         }
                         : f
                 )
@@ -67,10 +67,10 @@ const PdfViewer = () => {
                     {
                         ...field,
                         pageNumber,
-                        xPercent: relative.xPercent,
-                        yPercent: relative.yPercent,
-                        widthPercent: per.widthPercent,
-                        heightPercent: per.heightPercent,
+                        xPercent: pos.xPercent,
+                        yPercent: pos.yPercent,
+                        widthPercent: size.widthPercent,
+                        heightPercent: size.heightPercent,
                     },
                 ]
         );

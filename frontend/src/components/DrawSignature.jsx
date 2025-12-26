@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import SignatureCanvas from 'react-signature-canvas';
 import { usePdf } from '../hooks/usePdf';
 import { v4 as uuidv4 } from 'uuid';
-import { Upload } from 'lucide-react';
+import { LuUpload } from "react-icons/lu";
 
 const DrawSignature = ({ handleUpdateFields }) => {
 
@@ -159,7 +159,7 @@ const DrawSignature = ({ handleUpdateFields }) => {
 
                                             <>
                                                 <div className="bg-gray-200 p-5 border-2 border-gray-300 rounded-full mb-4">
-                                                    <Upload size={30} />
+                                                    <LuUpload size={30} />
                                                 </div>
                                                 <p className="text-[14px] text-gray-800 font-medium">Browse or drag a Image</p>
                                                 <p className="text-sm font-medium text-gray-800">Supported Files : Png, Jpg, Jpeg</p>
