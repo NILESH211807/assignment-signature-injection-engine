@@ -13,6 +13,7 @@ const SignedUrl = ({ setIsSignedUrl, signedUrl }) => {
                         className="border border-gray-300 rounded-md py-2 px-4 text-sm font-semibold outline-none" />
                     <div className='flex gap-3 justify-end pb-3'>
                         <button onClick={() => setIsSignedUrl(false)} className='bg-red-600 cursor-pointer text-white rounded-md px-4 py-2 text-sm font-semibold'>Close</button>
+                        <Link to={signedUrl + '?ik-attachment=true'} target={'_blank'} className='bg-indigo-700 cursor-pointer text-white rounded-md px-4 py-2 text-sm font-semibold'>Download PDF</Link>
                         <Link to={signedUrl} target={'_blank'} className='bg-green-600 cursor-pointer text-white rounded-md px-4 py-2 text-sm font-semibold'>Open</Link>
                     </div>
                 </div>
